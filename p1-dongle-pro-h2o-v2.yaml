@@ -54,11 +54,11 @@ wifi:
 dashboard_import:
   package_import_url: github://mhendriks/esphome-p1/p1-dongle-pro-h2o-v2.yaml@main
 
-external_components:
+#external_components:
 #   - source: my_components
 #     components: [ dsmr ]
-   - source: github://mhendriks/esphome-p1@main
-     components: [dsmr]
+#   - source: github://mhendriks/esphome-p1@main
+#     components: [dsmr]
 #  - source: github://pr#6841
 #    components: [dsmr]
 

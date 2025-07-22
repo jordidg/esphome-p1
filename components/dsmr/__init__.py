@@ -87,7 +87,7 @@ async def to_code(config):
     cg.add_build_flag("-DDSMR_WATER_MBUS_ID=" + str(config[CONF_WATER_MBUS_ID]))
 
     # DSMR Parser
-    cg.add_library("glmnet/Dsmr", "0.9", "https://github.com/PolarGoose/arduino-dsmr-make-work-on-Windows-and-Linux@make_the_library_run_on_Windows_and_Linux_machines")
+    cg.add_library("glmnet/Dsmr", "0.9", "https://github.com/PolarGoose/arduino-dsmr-make-work-on-Windows-and-Linux#make_the_library_run_on_Windows_and_Linux_machines")
 
     # Crypto
     cg.add_library("rweather/Crypto", "0.4.0")
