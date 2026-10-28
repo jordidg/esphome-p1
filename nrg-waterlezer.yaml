@@ -2,7 +2,7 @@ substitutions:
   device_name: nrg-waterlezer
   device_description: "NRG Dongle Pro+ Waterlezer"
   friendly_name: NRG Dongle Pro Waterlezer
-  prj_version: "2025.04.01"
+  prj_version: "2026.03.01"
 
 esphome:
   name: ${device_name}
@@ -16,7 +16,9 @@ esphome:
     
 esp32:
   board: esp32-c3-devkitm-1
-  
+  framework:
+    type: esp-idf  
+    
 improv_serial:
   next_url: http://{{ip_address}}
 
@@ -54,34 +56,9 @@ wifi:
 dashboard_import:
   package_import_url: github://mhendriks/esphome-p1/nrg-waterlezer.yaml@main
 
-external_components:
-#   - source: my_components
-#     components: [ dsmr ]
-#   - source: github://mhendriks/esphome-p1@main
-#     components: [dsmr]
-  - source: github://pr#6841
-    components: [dsmr]
-
 # Enable logging
 logger:
   level: ERROR
-
-dsmr:
-  uart_id: p1_uart
-  water_mbus_id: 2
-  max_telegram_length: 1700
-  
-uart:
-  - id: p1_uart
-    rx_pin:
-      number: 20
-      inverted: true
-    baud_rate: 115200
-    rx_buffer_size: 1700
-  - id: p1_bridge_uart
-    tx_pin:
-      number: 10
-    baud_rate: 115200
   
 status_led:
   pin:
@@ -108,9 +85,11 @@ binary_sensor:
     pin:
       number: 9
       inverted: true
+      ignore_strapping_warning: true
       mode:
         input: true
         pullup: true
+        
     name: _PushButton
     on_press:
       then:
@@ -122,13 +101,13 @@ sensor:
       number: 6
       mode:
         input: true
-#         pullup: true
     id: watermeter_pulse
     name: "Watermeter pulse"
     count_mode:
       rising_edge: DISABLE
       falling_edge: INCREMENT
     state_class: measurement
+    device_class: volume_flow_rate
     update_interval: 1s
     internal_filter: 13us
     accuracy_decimals: 0

@@ -2,7 +2,7 @@ substitutions:
   device_name: ultra-p1-h2o
   device_description: "Ultra dongle with P1 and water sensor"
   friendly_name: Ultra P1 H2O
-  prj_version: "2024.6.2"
+  prj_version: "2026.1.1"
 
 esphome:
   name: ${device_name}
@@ -16,7 +16,9 @@ esphome:
     
 esp32:
   variant: esp32s3
-  board: esp32-s3-devkitc-1
+  board: esp32-s3-devkitc-1  
+  framework:
+    type: arduino
 
 ethernet:
   type: W5500
@@ -60,12 +62,12 @@ uart:
     number: 18
     inverted: true
   baud_rate: 115200
-  rx_buffer_size: 1700
+  rx_buffer_size: 2400
 
 dsmr:
  id: dsmr_instance
  receive_timeout: 200ms
- max_telegram_length: 1700
+ max_telegram_length: 2400
  request_pin: 
     number: 17
     inverted: true
@@ -136,6 +138,7 @@ binary_sensor:
   - platform: gpio
     pin:
       number: 0
+      ignore_strapping_warning: true
       inverted: true
       mode:
         input: true
@@ -150,6 +153,7 @@ sensor:
     name: "Watermeter pulse"
     pin: 
       number: 46
+      ignore_strapping_warning: true
       mode:
         input: true
         pullup: true 
